@@ -1,0 +1,41 @@
+# محیط مجازی
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# فایل‌های بایت‌کد پایتون
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# فایل‌های مخفی سیستم‌عامل
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# پوشه‌های Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# پوشه دیتاست (می‌تونه سنگین باشه، ولی بعضی‌ها کامیتش می‌کنن)
+# اگر دیتاست سنگینه، این خط رو هم باز کن:
+# data/
+
+# فایل‌های لاگ و خروجی
+*.log
+*.out
+*.err
+
+# فایل‌های وزن مدل (اختیاری - اگر سنگینن، کامیت نکن)
+# *.pth
+# *.h5
+# pretrained_weights/
+
+# فایل‌های IDE
+.vscode/
+.idea/
+*.iml
