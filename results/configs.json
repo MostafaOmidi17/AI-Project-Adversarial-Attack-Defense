@@ -1,0 +1,5 @@
+{
+  "seed": 42,
+  "dataset": "CIFAR-10",
+  "model": "ResNet-20"
+}
