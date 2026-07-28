@@ -8,12 +8,10 @@ from torch.utils.data import DataLoader
 import torchvision
 import torchvision.transforms as transforms
 
-# Import Person 1 modules (Always available)
 from src.models import build_normalized_resnet20
 from src.attacks.fgsm import fgsm_attack
 from src.attacks.pgd import pgd_attack
 
-# Import Person 2 modules (Handled with try-except for parallel development)
 try:
     from src.attacks.deepfool import deepfool_attack
 except ImportError:
@@ -88,7 +86,7 @@ def run_evaluation(
                 adv_logits = model(adv_images)
                 adv_preds = adv_logits.argmax(dim=1)
 
-        # 3. Calculate Metrics (Contract Sections 9 & 10)
+        # 3. Calculate Metrics
         adv_correct_mask = adv_preds.eq(labels)
         adv_correct += adv_correct_mask.sum().item()
         
@@ -96,7 +94,7 @@ def run_evaluation(
         success_mask = clean_correct_mask & (~adv_correct_mask)
         successful_attacks += success_mask.sum().item()
 
-        # Calculate Perturbation Norms (Contract Section 10)
+        # Calculate Perturbation Norms
         perturbation = adv_images - images
         l2_norms = perturbation.flatten(1).norm(p=2, dim=1)
         linf_norms = perturbation.flatten(1).abs().max(dim=1).values
@@ -111,7 +109,7 @@ def run_evaluation(
 
         total_samples += batch_size
 
-    # Aggregate Metrics (Contract Section 17)
+    # Aggregate Metrics 
     clean_acc = clean_correct / total_samples
     robust_acc = adv_correct / total_samples
     asr = successful_attacks / max(clean_correct, 1)
@@ -124,7 +122,7 @@ def run_evaluation(
 
     total_time = attack_time_total + defense_time_total
 
-    # Construct run_id (Contract Section 16)
+    # Construct run_id 
     param_str = ""
     if attack_id == "fgsm":
         param_str = f"__eps{int(attack_params.get('epsilon', 0) * 255)}"
@@ -157,7 +155,7 @@ def run_evaluation(
         "checkpoint_name": checkpoint_name
     }
 
-    # Save to CSV (Contract Section 17)
+    # Save to CSV 
     csv_path = os.path.join("results", "metrics.csv")
     os.makedirs("results", exist_ok=True)
     
@@ -186,9 +184,7 @@ def main():
     test_dataset = torchvision.datasets.CIFAR10(root='./data', train=False, download=True, transform=transform)
     test_loader = DataLoader(test_dataset, batch_size=128, shuffle=False, num_workers=2)
 
-    # =========================================================================
-    # Phase 1: Evaluate Base Model (none)
-    # =========================================================================
+    
     checkpoint_clean = os.path.join("checkpoints", "resnet20_clean_best.pt")
     if os.path.exists(checkpoint_clean):
         print("\n--- Evaluating Base Model ---")
@@ -207,9 +203,7 @@ def main():
     else:
         print(f"Warning: Clean checkpoint not found at {checkpoint_clean}")
 
-    # =========================================================================
-    # Phase 2: Evaluate Adversarially Trained Model (pgd_at)
-    # =========================================================================
+    
     checkpoint_at = os.path.join("checkpoints", "resnet20_pgd_at_eps8_best.pt")
     if os.path.exists(checkpoint_at):
         print("\n--- Evaluating PGD-AT Model ---")
