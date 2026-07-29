@@ -1,0 +1,117 @@
+{
+  "count": 15,
+  "generated_figures": [
+    {
+      "bytes": 201834,
+      "drive_path": "/content/drive/MyDrive/AI-Project-Adversarial-Attack-Defense/results/final_figures/robust_accuracy_heatmap.png",
+      "filename": "robust_accuracy_heatmap.png",
+      "repository_path": "figures/robust_accuracy_heatmap.png",
+      "sha256": "b99bbc7e79065209728516ce03e93c7e6db6d9e92e32608289f3e80eb58f9b58"
+    },
+    {
+      "bytes": 88718,
+      "drive_path": "/content/drive/MyDrive/AI-Project-Adversarial-Attack-Defense/results/final_figures/fgsm_epsilon_curve_none.png",
+      "filename": "fgsm_epsilon_curve_none.png",
+      "repository_path": "figures/fgsm_epsilon_curve_none.png",
+      "sha256": "96bb031c220b002888a1067032bf927bdda04bdb477e6afc5446a1270e0007a7"
+    },
+    {
+      "bytes": 114766,
+      "drive_path": "/content/drive/MyDrive/AI-Project-Adversarial-Attack-Defense/results/final_figures/fgsm_epsilon_curve_pgd_at.png",
+      "filename": "fgsm_epsilon_curve_pgd_at.png",
+      "repository_path": "figures/fgsm_epsilon_curve_pgd_at.png",
+      "sha256": "490aaf63686bdcb43110d7e9dbc2360ba99e1db12ee74c11676393632bd67c47"
+    },
+    {
+      "bytes": 123489,
+      "drive_path": "/content/drive/MyDrive/AI-Project-Adversarial-Attack-Defense/results/final_figures/fgsm_epsilon_curve_rand_smooth.png",
+      "filename": "fgsm_epsilon_curve_rand_smooth.png",
+      "repository_path": "figures/fgsm_epsilon_curve_rand_smooth.png",
+      "sha256": "cfc9d3a33afa371b75275b45c05cbc8f8b9087031a0ec694615ed54c68402195"
+    },
+    {
+      "bytes": 122399,
+      "drive_path": "/content/drive/MyDrive/AI-Project-Adversarial-Attack-Defense/results/final_figures/fgsm_epsilon_curve_diff_purify.png",
+      "filename": "fgsm_epsilon_curve_diff_purify.png",
+      "repository_path": "figures/fgsm_epsilon_curve_diff_purify.png",
+      "sha256": "5e0eb9d6fc07a060649a18f1486483cae5a1cab0cf7629c31a7aa4ac3b7f9ba1"
+    },
+    {
+      "bytes": 113973,
+      "drive_path": "/content/drive/MyDrive/AI-Project-Adversarial-Attack-Defense/results/final_figures/clean_robust_tradeoff_pgd.png",
+      "filename": "clean_robust_tradeoff_pgd.png",
+      "repository_path": "figures/clean_robust_tradeoff_pgd.png",
+      "sha256": "4f79016530bfcb9882804df20159195f4d4b7d7082dc4400f8b27f714754a499"
+    },
+    {
+      "bytes": 108081,
+      "drive_path": "/content/drive/MyDrive/AI-Project-Adversarial-Attack-Defense/results/final_figures/inference_time_comparison.png",
+      "filename": "inference_time_comparison.png",
+      "repository_path": "figures/inference_time_comparison.png",
+      "sha256": "bd42aa8084f5382ab55a11b160e304757a8f2b681c6f54778de2c413d52b0fc6"
+    },
+    {
+      "bytes": 198766,
+      "drive_path": "/content/drive/MyDrive/AI-Project-Adversarial-Attack-Defense/results/final_figures/attack_examples_fgsm.png",
+      "filename": "attack_examples_fgsm.png",
+      "repository_path": "figures/attack_examples_fgsm.png",
+      "sha256": "8101f41560d09cc329d54b783707e3bf03d6badebec386672b25b29a4ce6b0e4"
+    },
+    {
+      "bytes": 84717,
+      "drive_path": "/content/drive/MyDrive/AI-Project-Adversarial-Attack-Defense/results/final_figures/fgsm_l2_distribution.png",
+      "filename": "fgsm_l2_distribution.png",
+      "repository_path": "figures/fgsm_l2_distribution.png",
+      "sha256": "ecda66ad15fa87ea97b4141f4027c7845c07e56664e22e99b1903a01ccb5e1c6"
+    },
+    {
+      "bytes": 204116,
+      "drive_path": "/content/drive/MyDrive/AI-Project-Adversarial-Attack-Defense/results/final_figures/attack_examples_pgd.png",
+      "filename": "attack_examples_pgd.png",
+      "repository_path": "figures/attack_examples_pgd.png",
+      "sha256": "3ccd57cc703ce239516b0f47ad018f6f104e48b0fe91d4092f761c1adb16662e"
+    },
+    {
+      "bytes": 99425,
+      "drive_path": "/content/drive/MyDrive/AI-Project-Adversarial-Attack-Defense/results/final_figures/pgd_l2_distribution.png",
+      "filename": "pgd_l2_distribution.png",
+      "repository_path": "figures/pgd_l2_distribution.png",
+      "sha256": "53261f6c5435e4abcc0fea8581e45bf9ba6c915c76d0a4b2d581a97790fa1f80"
+    },
+    {
+      "bytes": 200251,
+      "drive_path": "/content/drive/MyDrive/AI-Project-Adversarial-Attack-Defense/results/final_figures/attack_examples_deepfool.png",
+      "filename": "attack_examples_deepfool.png",
+      "repository_path": "figures/attack_examples_deepfool.png",
+      "sha256": "c08005ffb1c9aa6ecf83fdb849e7cb4c8bea728ddb8667bd9e01e7f71cac2f30"
+    },
+    {
+      "bytes": 93284,
+      "drive_path": "/content/drive/MyDrive/AI-Project-Adversarial-Attack-Defense/results/final_figures/deepfool_l2_distribution.png",
+      "filename": "deepfool_l2_distribution.png",
+      "repository_path": "figures/deepfool_l2_distribution.png",
+      "sha256": "eedfbcfe4fd807d8eea0209022d1292dff9e7eb4432e48ebe241332cf8a23541"
+    },
+    {
+      "bytes": 204515,
+      "drive_path": "/content/drive/MyDrive/AI-Project-Adversarial-Attack-Defense/results/final_figures/attack_examples_cw_l2.png",
+      "filename": "attack_examples_cw_l2.png",
+      "repository_path": "figures/attack_examples_cw_l2.png",
+      "sha256": "2b12d5c2acd8ddf0948bacce2ae402cd615a3c826cb7eb19be24a55dd149d12d"
+    },
+    {
+      "bytes": 105953,
+      "drive_path": "/content/drive/MyDrive/AI-Project-Adversarial-Attack-Defense/results/final_figures/cw_l2_l2_distribution.png",
+      "filename": "cw_l2_l2_distribution.png",
+      "repository_path": "figures/cw_l2_l2_distribution.png",
+      "sha256": "50e8c3b0cd5fbd8d800941e0b9fc79ea184b31dcf61b50ca98e953d7593eb94a"
+    }
+  ],
+  "schema_version": 1,
+  "source_metrics": {
+    "fgsm_epsilon": 0.03137254901960784,
+    "path": "results/metrics.csv",
+    "sha256": "72b12724720f817f7b99fefb3373faea7f8630cccac543e80976a49d30976281",
+    "split_for_main_comparison": "diffusion_subset"
+  }
+}

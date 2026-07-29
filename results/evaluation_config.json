@@ -1,0 +1,162 @@
+{
+  "attacks": {
+    "cw_l2": {
+      "c": 1.0,
+      "kappa": 0.0,
+      "learning_rate": 0.01,
+      "steps": 100
+    },
+    "deepfool": {
+      "max_steps": 50,
+      "num_classes": 10,
+      "overshoot": 0.02
+    },
+    "fgsm": {
+      "epsilon_sweep": [
+        0.00784313725490196,
+        0.01568627450980392,
+        0.03137254901960784,
+        0.06274509803921569
+      ],
+      "main_epsilon": 0.03137254901960784,
+      "steps": 1
+    },
+    "pgd": {
+      "alpha": 0.00784313725490196,
+      "epsilon": 0.03137254901960784,
+      "random_start": true,
+      "restarts": 1,
+      "steps": 20
+    }
+  },
+  "canonical_metric_columns": [
+    "run_id",
+    "model_id",
+    "defense_id",
+    "attack_id",
+    "split",
+    "num_samples",
+    "seed",
+    "epsilon",
+    "alpha",
+    "attack_steps",
+    "clean_accuracy",
+    "robust_accuracy",
+    "attack_success_rate",
+    "mean_l2",
+    "mean_l2_successful",
+    "mean_linf",
+    "mean_linf_successful",
+    "attack_time_seconds",
+    "defense_time_seconds",
+    "total_time_seconds",
+    "checkpoint_name"
+  ],
+  "dataset": "CIFAR-10",
+  "defenses": {
+    "diff_purify": {
+      "batch_size": 16,
+      "model_id": "google/ddpm-cifar10-32",
+      "timestep": 50
+    },
+    "pgd_at": {
+      "training_epsilon": 0.03137254901960784
+    },
+    "rand_smooth": {
+      "noise_batch_size": 25,
+      "sigma": 0.25,
+      "votes": 100
+    }
+  },
+  "evaluation_caveats": [
+    "Randomized smoothing and diffusion purification results are empirical, not certified robustness results.",
+    "Attacks against randomized smoothing and diffusion purification are non-adaptive base-model attacks; no BPDA or EOT attack is claimed.",
+    "Full-test and diffusion-subset rows must not be mixed in the same direct comparison."
+  ],
+  "metric_semantics": {
+    "accuracy_scale": "0_to_1",
+    "attack_success_denominator": "defended_clean_correct_samples",
+    "perturbation_norm_domain": "raw_adversarial_minus_original",
+    "unrelated_attack_parameters": "NaN"
+  },
+  "model_id": "resnet20",
+  "normalization_location": "inside_classifier_model",
+  "pixel_range": [
+    0.0,
+    1.0
+  ],
+  "project": "AI-Project-Adversarial-Attack-Defense",
+  "published_metrics": {
+    "path": "results/metrics.csv",
+    "published_by": "src.evaluate.publish_staged_metrics",
+    "rows": 56,
+    "sha256": "72b12724720f817f7b99fefb3373faea7f8630cccac543e80976a49d30976281"
+  },
+  "repository_metrics_policy": "Only evaluate.py may create or replace results/metrics.csv.",
+  "row_counts": {
+    "clean": 7,
+    "diffusion_subset": 32,
+    "test": 24,
+    "total": 56
+  },
+  "schema_version": 1,
+  "seed": 42,
+  "source_artifacts": {
+    "bounded_full_test": {
+      "path": "evaluate_colab_bounded_final.csv",
+      "sha256": "384cf654d489574c134948a25c46bd7982baeb7723437da96367caa4efff1349"
+    },
+    "diffusion_clean_cache": {
+      "path": "diff_purify_clean_cache_t50_bs16_seed42_n200.pt",
+      "sha256": "ff3dd451999fce8e971eeba23d4024ee82e0ee671a998f1ea1941159e6d3fe16"
+    },
+    "diffusion_subset_indices": {
+      "path": "diffusion_subset_indices_seed42_n200.json",
+      "sha256": "02e5c629d12c76ea96bed68625a07da47195217d340a3cf6a2a0924e648303b9"
+    },
+    "expensive_rand_smooth_full_test": {
+      "path": "evaluate_colab_expensive_rand_smooth_final.csv",
+      "sha256": "f3c6ed39604a31cdb4c568efdf6411f54bb116c3dde603cbd427e2126410d184"
+    },
+    "expensive_standard_full_test": {
+      "path": "evaluate_colab_expensive_standard_final.csv",
+      "sha256": "68a164455dc0e271efeaa3ef58a158ccd9bd4eff5e03bd01fb1ed89ddd46ab36"
+    },
+    "fair_subset_clean_cache": {
+      "path": "fair_subset_clean_cache_seed42_n200.pt",
+      "sha256": "b9f0b9ea6170c7979ebe405584910da6e589834bc5804390b6ae9c83a6303efe"
+    },
+    "four_defense_subset": {
+      "path": "evaluate_colab_four_defense_subset_final.csv",
+      "sha256": "0a96d9ad58dd021009d4dd06151bbe4877d7e1d97ece16685aad1c5649817e02"
+    },
+    "random_smoothing_clean_cache": {
+      "path": "rand_smooth_final_clean_cache.pt",
+      "sha256": "014c517172e80506839768c57559c9b408c1046939a628f1b99e616bad9cc4f8"
+    }
+  },
+  "splits": {
+    "diffusion_subset": {
+      "defenses": [
+        "none",
+        "pgd_at",
+        "rand_smooth",
+        "diff_purify"
+      ],
+      "num_samples": 200,
+      "selection": "first 200 indices from torch.randperm(10000) with seed 42"
+    },
+    "test": {
+      "defenses": [
+        "none",
+        "pgd_at",
+        "rand_smooth"
+      ],
+      "num_samples": 10000
+    }
+  },
+  "staging_metrics": {
+    "path": "external_drive/metrics_final_staging.csv",
+    "sha256": "72b12724720f817f7b99fefb3373faea7f8630cccac543e80976a49d30976281"
+  }
+}
