@@ -326,12 +326,17 @@ def plot_robust_accuracy_heatmap(
     ),
     show: bool = False,
     close: bool = True,
+    *,
+    fgsm_epsilon: float = 8 / 255,
 ) -> Figure:
     """
     Plot the required attack-by-defense evaluation matrix.
 
     Clean rows use clean_accuracy. Adversarial rows use robust_accuracy.
-    Repeated runs are averaged.
+
+    The final project matrix uses FGSM at fgsm_epsilon, which defaults
+    to the contract value 8/255. Repeated runs of the same selected
+    configuration, such as multiple seeds, are averaged.
     """
 
     _require_columns(
@@ -367,6 +372,54 @@ def plot_robust_accuracy_heatmap(
         data["defense_id"].isin(defense_order)
         & data["attack_id"].isin(attack_order)
     ]
+
+    if (
+        isinstance(fgsm_epsilon, bool)
+        or not isinstance(fgsm_epsilon, (int, float))
+        or not math.isfinite(float(fgsm_epsilon))
+        or float(fgsm_epsilon) <= 0.0
+    ):
+        raise ValueError(
+            "fgsm_epsilon must be a finite positive number."
+        )
+
+    fgsm_epsilon = float(fgsm_epsilon)
+    fgsm_mask = data["attack_id"].eq("fgsm")
+
+    if bool(fgsm_mask.any()):
+        _require_columns(
+            data,
+            ("epsilon",),
+            "metrics_df",
+        )
+
+        fgsm_values = _numeric(
+            data.loc[fgsm_mask, "epsilon"],
+            "FGSM epsilon",
+        )
+
+        fgsm_match_mask = pd.Series(
+            False,
+            index=data.index,
+            dtype=bool,
+        )
+
+        fgsm_match_mask.loc[fgsm_mask] = np.isclose(
+            fgsm_values.to_numpy(dtype=float),
+            fgsm_epsilon,
+            rtol=0.0,
+            atol=1e-9,
+        )
+
+        if not bool(fgsm_match_mask.any()):
+            raise ValueError(
+                "No FGSM rows match the requested "
+                f"fgsm_epsilon={_epsilon_label(fgsm_epsilon)}."
+            )
+
+        data = data.loc[
+            ~fgsm_mask | fgsm_match_mask
+        ]
 
     if data.empty:
         raise ValueError("No rows match the requested heatmap order.")

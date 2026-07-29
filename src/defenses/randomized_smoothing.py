@@ -166,7 +166,7 @@ def _add_noise(
 def add_gaussian_noise(
     images: Tensor,
     sigma: float = 0.25,
-    clip_noise: bool = False,
+    clip_noise: bool = True,
     generator: Optional[torch.Generator] = None,
 ) -> Tensor:
     """
@@ -193,11 +193,11 @@ def add_gaussian_noise(
     clip_noise:
         If True, noisy images are clamped to [0, 1].
 
-        The default is False because the standard randomized-smoothing
-        formulation uses the unmodified Gaussian distribution x + epsilon.
+        The project default is True because the technical contract
+        requires noisy images to remain in the raw [0, 1] pixel range.
 
-        If clipping is enabled during fine-tuning, it must also be enabled
-        during smoothed inference so that the two distributions match.
+        The same setting must be used during fine-tuning and smoothed
+        inference so that the two distributions match.
 
     generator:
         Optional torch.Generator for reproducible noise.
@@ -353,7 +353,7 @@ def gaussian_fine_tune(
     ] = None,
     criterion: Optional[nn.Module] = None,
     validation_loader: Optional[Iterable] = None,
-    clip_noise: bool = False,
+    clip_noise: bool = True,
     restore_best: bool = True,
 ) -> dict[str, Any]:
     """
@@ -483,6 +483,18 @@ def gaussian_fine_tune(
         resolved_device = torch.device(
             device
         )
+
+        # torch.device("cuda") and torch.device("cuda:0")
+        # refer to the same default CUDA device on a single-GPU
+        # runtime such as Google Colab.
+        if (
+            resolved_device.type == "cuda"
+            and resolved_device.index is None
+        ):
+            resolved_device = torch.device(
+                "cuda",
+                torch.cuda.current_device(),
+            )
 
         if resolved_device != current_device:
             raise ValueError(
@@ -740,7 +752,7 @@ def predict_smoothed(
     num_samples: int = 100,
     noise_batch_size: int = 25,
     num_classes: int = 10,
-    clip_noise: bool = False,
+    clip_noise: bool = True,
     generator: Optional[
         torch.Generator
     ] = None,
